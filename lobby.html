@@ -117,24 +117,17 @@
         </div>
     </div>
 
-    <script>
+<script>
         function startPongGame() {
-            console.log("Starting Pong game... (This will lead to game.html)");
-            // Later, this will navigate to the actual Pong game page.
-            // window.location.href = 'game.html';
+            console.log("Starting Pong game... Navigating to game.html");
+            window.location.href = 'game.html'; // This line navigates to game.html
         }
 
         function goToMansion() {
             console.log("Going back to Naina Talwar's Mansion.");
-            window.location.href = 'index.html'; // Navigate back to the main page
+            window.location.href = 'index.html';
         }
-
-        // Placeholder for future WebSocket logic to update player count
-        // For now, it's static.
-        // function updatePlayerCount(count) {
-        //     document.getElementById('playerCount').textContent = count;
-        // }
-        // Example: updatePlayerCount(1); // Call this if one player is in lobby
+        // ... (rest of your lobby.html script)
     </script>
 </body>
 </html>
