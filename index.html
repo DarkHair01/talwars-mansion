@@ -3,79 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <title>Naina Talwar's Mansion 🏡</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Playfair Display', serif;
-  
+      background-image: url('https://images.unsplash.com/photo-1542451390-388f6259d2a6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Cozy farm background */
       background-size: cover;
-      color: #f5f2e7;
+      background-position: center;
+      background-attachment: fixed; /* Keeps background fixed when scrolling */
+      color: #fdfaf6; /* Lighter text for contrast */
     }
 
     .overlay {
-      background-color: rgba(30, 50, 40, 0.6);
+      background-color: rgba(30, 50, 40, 0.7); /* Slightly more opaque overlay */
       min-height: 100vh;
       padding: 40px 20px;
+      display: flex; /* Use flexbox to center content vertically */
+      align-items: center; /* Center vertically */
+      justify-content: center; /* Center horizontally */
     }
 
     .container {
       max-width: 750px;
       margin: auto;
       padding: 30px;
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: rgba(255, 255, 255, 0.1); /* More subtle translucent background */
       border-radius: 16px;
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow for depth */
+      border: 1px solid rgba(255, 255, 255, 0.2); /* Soft white border */
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
+      font-size: 3.5rem; /* Slightly larger heading */
+      margin-bottom: 0.8rem;
       color: #fdfaf6;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
     }
 
     p {
       font-size: 1.2rem;
-      line-height: 1.6;
+      line-height: 1.7;
+      color: #fdfaf6; /* Ensure paragraph text is visible */
     }
 
     .note-box {
-      background: #fdfaf6;
+      background: rgba(253, 250, 246, 0.95); /* Slightly transparent white for note box */
       color: #3c2f2f;
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 25px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-radius: 12px; /* Slightly more rounded corners */
+      padding: 25px;
+      margin-top: 30px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border for note box */
     }
 
-    .monkey {
+    .note-box h3 {
+      font-size: 1.8rem;
+      color: #5c4b4b; /* Darker heading for note box */
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .note-box p {
+      font-size: 1.1rem;
+      color: #3c2f2f; /* Darker text for note box */
+    }
+
+    .character { /* Renamed from .monkey to be more generic */
       margin-top: 40px;
     }
 
-    .monkey img {
-      width: 100px;
-      animation: wiggle 1s infinite;
+    .character img {
+      width: 120px; /* Slightly larger image */
+      height: auto;
+      animation: bounce 1s infinite; /* Changed animation for a bouncier feel */
+      border-radius: 50%; /* Make image round if it's a character */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(10deg); }
-      75% { transform: rotate(-10deg); }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); } /* Bounces up */
     }
 
     .progress {
-      font-size: 1rem;
-      margin-top: 8px;
+      font-size: 1.1rem;
+      margin-top: 10px;
       color: #d5c8b1;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
 <body>
   <div class="overlay">
     <div class="container">
-      <h1>Welcome to Naina Talwar's Mansion 👻</h1>
+      <h1>Welcome to Naina Talwar's Mansion 🏡</h1>
       <p>Naina Talwar is still looking for Bunny, but to choke his neck for he "udna chahta hun Naina".</p>
 
       <div class="note-box">
@@ -83,9 +107,8 @@
         <p>"BOoooooooooooooOOOooo." 🌧️</p>
       </div>
 
-      <div class="monkey">
-        <img src="https://www.shutterstock.com/image-vector/big-gorilla-standing-on-ground-260nw-1059172166.jpg" />
-        <div class="progress">Work in progress... 🛠️</div>
+      <div class="character">
+        <img src="https://via.placeholder.com/120/808080/FFFFFF?text=Cute+Character" alt="Game Character Placeholder" /> <div class="progress">Work in progress... 🛠️</div>
       </div>
     </div>
   </div>
