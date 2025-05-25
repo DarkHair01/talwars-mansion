@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Lobby 🎮</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Playfair Display', serif;
+            background-image: url('https://images.unsplash.com/photo-1542451390-388f6259d2a6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Same cozy farm background */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fdfaf6;
+        }
+
+        .overlay {
+            background-color: rgba(30, 50, 40, 0.7);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.8rem;
+            color: #fdfaf6;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #fdfaf6;
+            margin-bottom: 20px; /* Add some space below paragraphs */
+        }
+
+        .player-info {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #d5c8b1;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-group {
+            margin-top: 30px;
+        }
+
+        .button-group button {
+            background-color: #79a37e; /* Green button */
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px; /* Space between buttons */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-group button:hover {
+            background-color: #6a926f;
+            transform: translateY(-2px);
+        }
+
+        .button-group button:active {
+            background-color: #5a7b60;
+            transform: translateY(0);
+        }
+
+        /* Styling for the back button, slightly different color */
+        .button-group .back-button {
+            background-color: #a37979; /* A reddish-brown for contrast */
+        }
+
+        .button-group .back-button:hover {
+            background-color: #926a6a;
+        }
+
+        .button-group .back-button:active {
+            background-color: #7b5a5a;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <h1>Game Lobby 🎮</h1>
+            <p>Waiting for players to join...</p>
+
+            <div class="player-info">
+                <span id="playerCount">0</span> players connected
+                </div>
+
+            <div class="button-group">
+                <button onclick="startPongGame()">Start Pong Game</button>
+                <button class="back-button" onclick="goToMansion()">Back to Mansion</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startPongGame() {
+            console.log("Starting Pong game... (This will lead to game.html)");
+            // Later, this will navigate to the actual Pong game page.
+            // window.location.href = 'game.html';
+        }
+
+        function goToMansion() {
+            console.log("Going back to Naina Talwar's Mansion.");
+            window.location.href = 'index.html'; // Navigate back to the main page
+        }
+
+        // Placeholder for future WebSocket logic to update player count
+        // For now, it's static.
+        // function updatePlayerCount(count) {
+        //     document.getElementById('playerCount').textContent = count;
+        // }
+        // Example: updatePlayerCount(1); // Call this if one player is in lobby
+    </script>
+</body>
+</html>
