@@ -158,24 +158,54 @@
             }
 
             // Determine which paddle the ball is interacting with
-            let playerPaddle = (ball.x < canvas.width / 2) ? player1 : player2;
+            let playerPaddle;
+            if (ball.speedX < 0) { // Ball moving towards player 1
+                playerPaddle = player1;
+            } else { // Ball moving towards player 2
+                playerPaddle = player2;
+            }
 
             // Ball collision with paddles
-            if (
-                ball.x - ball.radius < playerPaddle.x + playerPaddle.width && // left edge of ball vs right edge of paddle
+            // Check for collision only if the ball is within the paddle's X range
+            if (ball.x - ball.radius < playerPaddle.x + playerPaddle.width && // left edge of ball vs right edge of paddle
                 ball.x + ball.radius > playerPaddle.x &&                     // right edge of ball vs left edge of paddle
                 ball.y + ball.radius > playerPaddle.y &&                     // bottom edge of ball vs top edge of paddle
                 ball.y - ball.radius < playerPaddle.y + playerPaddle.height   // top edge of ball vs bottom edge of paddle
             ) {
-                // If it hits the current player's paddle
-                ball.speedX = -ball.speedX; // Reverse horizontal direction
+                // Determine the contact side
+                let hitFromLeft = ball.x < playerPaddle.x; // Ball coming from left to player2 paddle
+                let hitFromRight = ball.x > playerPaddle.x + playerPaddle.width; // Ball coming from right to player1 paddle
 
-                // Add a slight vertical change based on where it hit the paddle
+                // Reverse horizontal direction
+                ball.speedX = -ball.speedX;
+
+                // Crucial fix: Push ball out of paddle to prevent sticking
+                if (playerPaddle === player1) { // Ball hit player 1's paddle
+                    ball.x = player1.x + player1.width + ball.radius; // Push ball to the right of paddle 1
+                } else { // Ball hit player 2's paddle
+                    ball.x = player2.x - ball.radius; // Push ball to the left of paddle 2
+                }
+
+                // Calculate angle of rebound based on hit point on paddle
                 let collidePoint = ball.y - (playerPaddle.y + playerPaddle.height / 2);
-                collidePoint = collidePoint / (playerPaddle.height / 2);
-                let angleRad = (Math.PI / 4) * collidePoint; // Max 45 degrees
-                ball.speedY = ball.speedX * Math.sin(angleRad); // Adjust vertical speed
-                ball.speedX = ball.speedX * Math.cos(angleRad);
+                collidePoint = collidePoint / (playerPaddle.height / 2); // Normalize to -1 to 1
+                const maxBounceAngle = Math.PI / 3; // Max 60 degrees (more common for Pong)
+                let angle = collidePoint * maxBounceAngle;
+
+                // Adjust ball speeds based on angle
+                // Ensure speed remains constant (or increases slightly if desired)
+                let currentSpeed = Math.sqrt(ball.speedX * ball.speedX + ball.speedY * ball.speedY); // Maintain current speed magnitude
+                ball.speedX = currentSpeed * Math.cos(angle);
+                ball.speedY = currentSpeed * Math.sin(angle);
+
+                // If player 2's paddle, invert speedX again because it was already flipped
+                if (playerPaddle === player2) {
+                    ball.speedX = -ball.speedX;
+                }
+
+                // Optional: Increase ball speed slightly after each hit
+                // ball.speedX *= 1.05;
+                // ball.speedY *= 1.05;
             }
 
 
@@ -197,7 +227,7 @@
             if (player1.y + player1.height > canvas.height) player1.y = canvas.height - player1.height;
 
             // Simple AI for player 2 (moves towards the ball's Y position)
-            const aiSpeed = 3; // How fast the AI paddle moves
+            const aiSpeed = 4; // How fast the AI paddle moves - increased slightly for better play
             if (player2.y + player2.height / 2 < ball.y - 10) { // If ball is below center of paddle
                 player2.y += aiSpeed;
             } else if (player2.y + player2.height / 2 > ball.y + 10) { // If ball is above center of paddle
@@ -211,8 +241,10 @@
         function resetBall() {
             ball.x = canvas.width / 2;
             ball.y = canvas.height / 2;
-            ball.speedX = -ball.speedX; // Serve in opposite direction
-            ball.speedY = 5 * (Math.random() * 2 - 1); // Randomize vertical speed
+            ball.speedX = (Math.random() > 0.5 ? 1 : -1) * 5; // Randomly serve left or right
+            ball.speedY = (Math.random() * 2 - 1) * 5; // Randomize vertical speed
+            // If ball gets stuck in paddle, speed it up to unstick.
+            if (Math.abs(ball.speedY) < 1) ball.speedY = 1; // Ensure some vertical movement
         }
 
         // Render Function (Draws everything)
